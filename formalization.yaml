@@ -1,0 +1,256 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Erdős Problem #374: positive lower density of D₆ and the growth of D₃–D₅"
+  description: >-
+    For m > 1 let F(m) be the least k ≥ 2 such that a₁! a₂! ⋯ a_k! is a perfect square for
+    some 1 ≤ a₁ < ⋯ < a_k = m, and let D_k = {m > 1 : F(m) = k}. Erdős and Graham asked
+    whether D₆ has positive lower density (Erdős Problem #374). This repository proves in
+    Lean 4 with Mathlib that D₆ has positive lower density, together with the main theorem of
+    Hartley–Olson: an explicit squarefree set 𝒜 has natural density δ > 0, the members of D₆
+    in 𝒜 with a prime factor larger than m^{99/100} have natural density exactly
+    δ log(100/99), and D₆ has lower density at least δ log(100/99). It also proves
+    D₃(X) = κ₃ √X + O(X^{2/5+ε}) with κ₃ = Σ_{q ∈ 𝒬} q^{-1/2} (a convergent series over the
+    nontrivial squarefree kernels of factorials), D₃(X) ≍ √X, and that D₄ and D₅ have lower
+    densities at least 1/4 and log 2 / 40000. The analytic inputs (the prime number theorem,
+    an almost-all short-interval prime estimate of Harman type, a reciprocal-prime
+    equidistribution estimate, Weil-type bounds for hyperelliptic curves, and large-sieve
+    estimates) are proved within the development; no hypotheses or custom axioms remain.
+  authors:
+    - "Jonathan S. Hartley"
+    - "Matthew A. Olson"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Jonathan S. Hartley"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11N25", "11B65", "11B05", "11N36", "11N05"]
+
+sources:
+  - title: "A Resolution of Erdős 374"
+    authors:
+      - "Jonathan S. Hartley"
+      - "Matthew A. Olson"
+    id: "https://papers.ssrn.com/abstract=7537279"
+    type: "paper"
+    location: "SSRN, abstract 7537279; first posted 29 September 2026. The current version is in paper/."
+    relationship: "formalizes"
+    note: >-
+      Challenge.lean states Theorem 1.1 (main_theorem and D6_positiveLowerDensity) and
+      Theorem 7.1(i)–(iii) (D3_asymptotic, D3_order, D4_lowerDensity, D5_lowerDensity).
+      The paper and the formalization were developed together.
+    license: "unknown"
+    author_endorsement: "participated"
+  - title: "On products of factorials"
+    authors:
+      - "Paul Erdős"
+      - "Ronald L. Graham"
+    id: "https://www.renyi.hu/~p_erdos/1976-25.pdf"
+    type: "article"
+    location: "Bulletin of the Institute of Mathematics, Academia Sinica 4 (1976), 337–355"
+    relationship: "background"
+    note: "Defines F(m) and D_k, shows F(m) ≤ 6 for composite m, and asks whether D₆ has positive lower density."
+    license: "unknown"
+    author_endorsement: "n/a"
+  - title: "Erdős Problem #374"
+    id: "https://www.erdosproblems.com/374"
+    type: "web page"
+    location: "https://www.erdosproblems.com/374"
+    relationship: "background"
+    note: "Problem statement and discussion."
+    license: "unknown"
+    author_endorsement: "n/a"
+  - title: "Square products of factorials and a conjecture of Erdős and Graham"
+    authors:
+      - "Fedir Yudin"
+    id: "arXiv:2610.01899"
+    type: "preprint"
+    location: "https://arxiv.org/abs/2610.01899 (1 October 2026)"
+    relationship: "other"
+    note: >-
+      Independent proof that D₆ has positive lower density, together with D₅(X) ≍ X and the
+      asymptotic for D₃(X), by a different argument (Huxley's short-interval theorem in place
+      of Harman's almost-all theorem; Tao's uniform Pell-equation bound in place of the
+      elementary count used here). Not used by this formalization.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Singmaster's conjecture in the interior of Pascal's triangle"
+    authors:
+      - "Kaisa Matomäki"
+      - "Maksym Radziwiłł"
+      - "Xuancheng Shao"
+      - "Terence Tao"
+      - "Joni Teräväinen"
+    id: "doi:10.1093/qmath/haac006"
+    type: "article"
+    location: "Quarterly Journal of Mathematics 73 (2022), 1137–1177; Proposition 1.13(ii)"
+    relationship: "background"
+    note: "Source of the reciprocal-prime equidistribution estimate, which is proved in the development."
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Primes in short intervals"
+    authors:
+      - "Glyn Harman"
+    id: "doi:10.1007/BF01214174"
+    type: "article"
+    location: "Mathematische Zeitschrift 180 (1982), 335–348"
+    relationship: "background"
+    note: "Source of the almost-all short-interval prime estimate, which is proved in the development."
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "A larger sieve"
+    authors:
+      - "Patrick X. Gallagher"
+    id: "Acta Arith. 18 (1971), 77–81"
+    type: "article"
+    location: "Acta Arithmetica 18 (1971), 77–81"
+    relationship: "background"
+    note: "Used for the D₃ error term; Gallagher's larger sieve is proved in the development."
+    license: "unknown"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "https://github.com/jon-hartley/erdos374_lean_verification"
+    relationship: "adapts"
+    note: >-
+      The same development before the port to the Lean module system. Here every file uses
+      the module system, the largest file is split into seven parts under 10,000 lines, the
+      D₅ constant is exposed as a separate theorem, and Challenge.lean/Solution.lean are added.
+  - id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    relationship: "adapts"
+    note: "Fourteen modules (Apache-2.0) are incorporated in flattened form in src/Erdos374_Update152_Part4.lean, _Part5.lean and _Part6.lean (sections Flat_PrimeNumberTheoremAnd_*); see THIRD_PARTY_NOTICES.md."
+  - id: "https://github.com/math-inc/RiemannHypothesisCurves"
+    relationship: "adapts"
+    note: >-
+      Port of commit c99880dff2a087d59147ab832074379ac28f7e68 (the Riemann hypothesis for
+      hyperelliptic curves over finite fields, produced by Math Inc.'s Gauss agent),
+      incorporated in src/Erdos374_Update152_Part6.lean. The source repository has no licence file;
+      see THIRD_PARTY_NOTICES.md.
+  - id: "https://github.com/ericlisg/erdos768-lean"
+    relationship: "adapts"
+    note: "Additive large sieve (Apache-2.0), incorporated in src/Erdos374_Update152_Part4.lean (§135A)."
+  - id: "https://github.com/peilinliu66-dev/jsp309-erdos374-four-growth-orders"
+    relationship: "independent"
+    note: "An independent Lean formalization of the order-of-growth statements of Yudin's preprint."
+
+status:
+  scope: >-
+    Everything stated in Challenge.lean is proved, with no hypotheses: D₆ has positive lower
+    density; Theorem 1.1 of the paper (natural density of 𝒜, exact natural density of
+    D₆ ∩ B_{1/100}, lower density of D₆); the D₃ asymptotic with a convergent constant κ₃;
+    D₃(X) ≍ √X; lower-density bounds 1/4 for D₄ and log 2 / 40000 for D₅. Not formalized or
+    claimed: whether D₆ (or D₄, D₅) has a natural density, the exact lower densities, the
+    numerical value of κ₃, and the Erdős–Graham bound F(m) ≤ 6 for composite m.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["ChatGPT Astra", "Gemini 3.1 Pro", "Gemini 3.8 Flash", "Claude Opus 5.5", "Claude Fable 5.1", "Grok 4.7"]
+      framework: "not recorded"
+      tool_setup: >-
+        AI agents wrote and repaired the Lean development under the direction of the authors,
+        who checked each stage by compiling it with the Lean kernel and auditing the axioms.
+      cost:
+        wall_time: "not recorded"
+        spend_usd: "not tracked"
+        hardware: "not recorded"
+      prompting_notes: "n/a"
+    - method: "agent"
+      models: ["Gauss (Math Inc.)"]
+      framework: "Math Inc. autoformalization agent"
+      tool_setup: "Produced the incorporated Riemann-hypothesis-for-hyperelliptic-curves development (see related_formalizations)."
+      cost:
+        wall_time: "not known"
+        spend_usd: "not known"
+        hardware: "not known"
+      prompting_notes: "n/a"
+    - method: "agent"
+      models: ["Claude Opus 5.5"]
+      framework: "Claude (agentic coding)"
+      tool_setup: >-
+        Port to the Lean module system, the file split, the D₅ constant theorem, and
+        Challenge.lean/Solution.lean with the bridge lemmas, directed by the responsible
+        maintainer and checked by full recompilation.
+      cost:
+        wall_time: "about one day"
+        spend_usd: "subscription-based"
+        hardware: "cloud container"
+      prompting_notes: "n/a"
+  spend_usd: "not tracked"
+  notes: >-
+    The mathematics and the formalization were produced with substantial AI assistance, as
+    disclosed in the paper. The authors directed the work and checked it through Lean
+    compilation and axiom audits; correctness rests on the Lean kernel and on the statements in
+    Challenge.lean, which are short and use only Mathlib definitions plus the documented
+    definitions given there.
+
+fidelity:
+  divergences: >-
+    (1) The factorial indices are positive integers; allowing 0 or 1 does not change F(m) for
+    m > 1 (explained in Challenge.lean). (2) F(m) is not defined as a function; D k is defined
+    directly as the set of m > 1 with a k-factor representation and no j-factor
+    representation for 2 ≤ j < k. (3) "Lower density at least δ" is stated as "for every
+    ε > 0, eventually count(N)/N ≥ δ − ε", which is equivalent to liminf ≥ δ; natural density
+    is stated with Filter.Tendsto. (4) Theorem 7.1(i) is stated as: for every ε > 0 there is C
+    with |D₃(X) − κ₃√X| ≤ C X^{2/5+ε} for all large X, and κ₃ is a tsum whose summability is
+    part of the statement. (5) Theorem 1.1 is stated with α = 1/100 and the explicit constant
+    δ log(100/99), as in the paper. Otherwise none known.
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "none"
+  notes: >-
+    The statements in Challenge.lean were written to match the paper; the responsible maintainer
+    reviews them against the paper before submission. Every module was compiled with Lean
+    v4.35.0-rc2 and Mathlib 487140449b, with no sorry and only the standard axioms. On
+    2026-10-06 lake comparator was run locally on leanexport exports of Challenge and
+    Solution (the statements match; Lean's kernel and the bundled nanoda kernel accept the
+    solution; con-ron, run separately for memory reasons, accepts all 85,056 exported
+    declarations). No independent human review of the formal statements has been done.
+
+alignment:
+  namespace: "ErdosProblem374"
+  statements:
+    - source: "Erdős–Graham question; Theorem 1.1 (last clause)"
+      lean: "ErdosProblem374.D6_positiveLowerDensity"
+      module: "Challenge"
+      status: "proved"
+      note: "D₆ has positive lower density."
+    - source: "Theorem 1.1, display (1.3)"
+      lean: "ErdosProblem374.main_theorem"
+      module: "Challenge"
+      status: "proved"
+      note: "Density of 𝒜, exact density of D₆ ∩ B_{1/100}, and the lower density of D₆."
+    - source: "Theorem 7.1(i)"
+      lean: "ErdosProblem374.D3_asymptotic"
+      module: "Challenge"
+      status: "proved"
+      note: "Convergence of κ₃ and D₃(X) = κ₃√X + O(X^{2/5+ε})."
+    - source: "Theorem 7.1(i)"
+      lean: "ErdosProblem374.D3_order"
+      module: "Challenge"
+      status: "proved"
+      note: "√X/2 ≤ D₃(X) ≤ C√X for large X."
+    - source: "Theorem 7.1(ii)"
+      lean: "ErdosProblem374.D4_lowerDensity"
+      module: "Challenge"
+      status: "proved"
+      note: "Lower density of D₄ at least 1/4."
+    - source: "Theorem 7.1(iii)"
+      lean: "ErdosProblem374.D5_lowerDensity"
+      module: "Challenge"
+      status: "proved"
+      note: "Lower density of D₅ at least log 2 / 40000."
+
+acknowledgements: >-
+  Mathlib and its contributors; the PrimeNumberTheoremAnd project; Math Inc. for the
+  RiemannHypothesisCurves development; the erdos768-lean project (github.com/ericlisg) for the
+  additive large sieve;
+  Jason Hickey and the Salt contributors for incorporated Item-1 files (see
+  THIRD_PARTY_NOTICES.md); and erdosproblems.com.

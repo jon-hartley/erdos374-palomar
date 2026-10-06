@@ -1,0 +1,15 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "ErdosProblem374.D6_positiveLowerDensity",
+    "ErdosProblem374.main_theorem",
+    "ErdosProblem374.D3_asymptotic",
+    "ErdosProblem374.D3_order",
+    "ErdosProblem374.D4_lowerDensity",
+    "ErdosProblem374.D5_lowerDensity"
+  ],
+  "definition_names": [],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}
